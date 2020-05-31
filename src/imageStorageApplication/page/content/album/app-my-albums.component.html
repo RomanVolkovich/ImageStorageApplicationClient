@@ -1,0 +1,44 @@
+<div>
+    <button type="button" class="btn btn-link btn-lg btn-block pt-2 h3" style="text-decoration: none; font-size: 20px" (click)="createAlbum()">
+        <fa-icon [icon]="faIconPlus" class="pr-3"></fa-icon>Новый альбом
+    </button>
+</div>
+
+<div *ngIf="albums.length === 0" class="text-center" style="padding-top: 50px">
+    В сервисе отсутствуют альбомы, создайте их
+</div>
+
+<div class="card-columns pt-1 pr-3 pl-1">
+    <div *ngFor="let album of albums" class="card justify-content-md-center" style="width: 450px; height: 600px;">
+        <button (click)="redirectToAlbum(album.id)" type="button" class="btn btn-outline-link p-3" style="height: 560px">
+            <div class="card-img-top p-0">
+                <img [src]="album.picture ? 'data:image/png;base64,' +  album.picture : 'assets/img/error-404.png'"
+                     class="card-img"
+                     width="450" height="300">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{album.name}}</h5>
+                <p class="card-text">{{album.description}}</p>
+                <p *ngIf="!album.description"><cite>описание отсутствует</cite></p>
+            </div>
+        </button>
+        <div class="card-footer bg-transparent p-0">
+            <div class="row">
+                <div class="col-10 text-center pr-0 pt-1">
+                    <button type="button" class="btn btn-outline-link text-success w-100 h-100 p-0"
+                            (click)="editAlbum(album.id, album.name, album.description)">
+                        <fa-icon [icon]="faIconPencilAlt" class="pr-3"></fa-icon> редактировать
+                    </button>
+                </div>
+                <div class="col-2 text-center pl-0 pt-1">
+                    <button type="button"
+                            class="btn btn-outline-link border-left text-danger w-100 h-100 p-0"
+                            (click)="deleteAlbum(album)">
+                        <fa-icon [icon]="faIconTrash"></fa-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

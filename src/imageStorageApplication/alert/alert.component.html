@@ -1,0 +1,6 @@
+﻿<button *ngFor="let alert of alerts"
+     class="{{cssClass(alert)}}"
+     (click)="removeAlert(alert)"
+     style="position: absolute; width: 100%">
+    <span [innerHTML]="alert.message"></span>
+</button>
